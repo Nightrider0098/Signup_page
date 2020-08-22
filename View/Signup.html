@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+</head>
+<script>
+
+    var xhttp = new XMLHttpRequest();
+
+    
+    xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4) {
+      
+    alert(xhttp.responseText);
+    // alert("account created!!!!".localeCompare(xhttp.responseText)==-1);
+   if("account created!!!!".localeCompare(xhttp.responseText)==-1)
+    {location.href = "http://localhost:5400/login";}
+   
+  }}
+
+
+    function validate() {
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let repassword = document.getElementById("confirmPassword").value;
+        // console.log(password,repassword);
+        if (password.localeCompare(repassword)!==0) {
+            // console.log("error")
+            alert("Password don't match");
+            return;
+        }
+        else {
+            var data = {'username': username,'email': email,'password': password};
+            let u = new URLSearchParams(data).toString();
+                xhttp.open("POST", "/newUser", true);
+                xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+                xhttp.send(u);
+            }
+    
+        
+
+    }
+</script>
+<style>
+    .signupBox {
+
+        margin: auto;
+        margin-top: 15px;
+        width: 35%;
+        padding: 15px;
+
+    }
+
+    .buttonHolder {
+        /* width: 220px; */
+        margin: auto;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+
+
+    }
+
+    .buttonSelf {
+        margin: auto;
+    }
+</style>
+
+<body>
+    <div class="conatiner">
+        <div class="signupBox">
+            <div class="inputHolder"><label>Username</label>
+                <input name="username" id="username" placeholder="" />
+            </div>
+            <div class="inputHolder"><label>Email</label>
+                <input name="email" id="email" placeholder="" />
+            </div>
+            <div class="inputHolder"><label>Password</label>
+                <input name="password" id="password" placeholder="" />
+            </div>
+            <div class="inputHolder"><label>Username</label>
+                <input id="confirmPassword" placeholder="" />
+            </div>
+            <div class="buttonHolder">
+                <button class="buttonSelf" onclick="validate()"> Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
